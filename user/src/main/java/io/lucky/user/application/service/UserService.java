@@ -6,7 +6,9 @@ import io.lucky.user.application.usecase.CreateUserUseCase;
 import io.lucky.user.domain.User;
 import io.lucky.user.domain.UserId;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
+@Service
 @RequiredArgsConstructor
 public class UserService implements CreateUserUseCase {
     private final CreateUserPort createUserPort;
