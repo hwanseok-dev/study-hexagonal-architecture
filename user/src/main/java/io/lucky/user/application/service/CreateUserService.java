@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserService implements CreateUserUseCase {
+public class CreateUserService implements CreateUserUseCase {
     private final CreateUserPort createUserPort;
     @Override
     public UserId create(CreateUserCommand command) {

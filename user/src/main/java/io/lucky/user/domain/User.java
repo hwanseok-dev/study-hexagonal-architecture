@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public class User {
+public class User extends BaseDomain {
     private final UserId id;
     private final String email;
     private final String nickname;
