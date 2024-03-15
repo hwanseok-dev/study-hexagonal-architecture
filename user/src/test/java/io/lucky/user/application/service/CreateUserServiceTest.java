@@ -1,7 +1,7 @@
 package io.lucky.user.application.service;
 
 import io.lucky.user.annotaion.IntegrationTestConfig;
-import io.lucky.user.application.query.SearchUserQuery;
+import io.lucky.user.application.query.LoadUserQuery;
 import io.lucky.user.application.usecase.CreateUserCommand;
 import io.lucky.user.domain.User;
 import io.lucky.user.domain.UserId;
@@ -16,7 +16,7 @@ class CreateUserServiceTest {
     @Autowired
     private CreateUserService createUserService;
     @Autowired
-    private SearchUserQuery searchUserQuery;
+    private LoadUserQuery loadUserQuery;
 
     @Test
     void create() {
@@ -27,7 +27,7 @@ class CreateUserServiceTest {
     @Test
     void createAndSearch(){
         UserId userId = createUser();
-        User user = searchUserQuery.getUser(userId);
+        User user = loadUserQuery.getUser(userId);
         assertThat(userId).isNotNull();
         assertThat(user).isNotNull();
         assertThat(user.getEmail()).isEqualTo(UserTestUtil.USER_EMAIL);

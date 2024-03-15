@@ -1,7 +1,7 @@
 package io.lucky.user.application.service;
 
 import io.lucky.user.application.port.SearchUserPort;
-import io.lucky.user.application.query.SearchUserQuery;
+import io.lucky.user.application.query.LoadUserQuery;
 import io.lucky.user.domain.User;
 import io.lucky.user.domain.UserId;
 import io.lucky.user.exception.DomainNotFoundException;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class SearchUserService implements SearchUserQuery {
+public class LoadUserService implements LoadUserQuery {
 
     private final SearchUserPort searchUserPort;
 
