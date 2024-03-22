@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class UserEntity {
+public class UserJpaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -16,10 +16,10 @@ public class UserEntity {
     private String nickname;
     private String password;
 
-    public UserEntity(Long idOrNull,
-                      String email,
-                      String nickname,
-                      String password) {
+    public UserJpaEntity(Long idOrNull,
+                         String email,
+                         String nickname,
+                         String password) {
         this.id = idOrNull;
         this.email = email;
         this.nickname = nickname;

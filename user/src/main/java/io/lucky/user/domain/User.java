@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Getter
 public class User extends BaseDomain {
-    private final UserId id;
+    private final Long id;
     private final String email;
     private final String nickname;
     private final String password;

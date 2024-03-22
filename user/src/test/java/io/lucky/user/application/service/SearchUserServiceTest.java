@@ -1,7 +1,6 @@
 package io.lucky.user.application.service;
 
 import io.lucky.user.annotaion.IntegrationTestConfig;
-import io.lucky.user.domain.UserId;
 import io.lucky.user.exception.DomainNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,7 @@ class SearchUserServiceTest {
 
     @Test
     void searchUserNotExists(){
-        assertThatThrownBy(() -> searchUserService.getUser(new UserId(1L)))
+        assertThatThrownBy(() -> searchUserService.getUser(1L))
                 .isInstanceOf(DomainNotFoundException.class);
     }
 }

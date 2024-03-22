@@ -4,7 +4,6 @@ import io.lucky.user.annotaion.IntegrationTestConfig;
 import io.lucky.user.application.query.LoadUserQuery;
 import io.lucky.user.application.usecase.CreateUserCommand;
 import io.lucky.user.domain.User;
-import io.lucky.user.domain.UserId;
 import io.lucky.user.util.UserTestUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +19,13 @@ class CreateUserServiceTest {
 
     @Test
     void create() {
-        UserId userId = createUser();
+        Long userId = createUser();
         assertThat(userId).isNotNull();
     }
 
     @Test
     void createAndSearch(){
-        UserId userId = createUser();
+        Long userId = createUser();
         User user = loadUserQuery.getUser(userId);
         assertThat(userId).isNotNull();
         assertThat(user).isNotNull();
@@ -35,12 +34,11 @@ class CreateUserServiceTest {
         assertThat(user.getPassword()).isEqualTo(UserTestUtil.USER_PASSWORD);
     }
 
-    private UserId createUser() {
+    private Long createUser() {
         CreateUserCommand command = new CreateUserCommand(
                 UserTestUtil.USER_EMAIL,
                 UserTestUtil.USER_NICKNAME,
                 UserTestUtil.USER_PASSWORD);
-        UserId userId = createUserService.create(command);
-        return userId;
+        return createUserService.create(command);
     }
 }
