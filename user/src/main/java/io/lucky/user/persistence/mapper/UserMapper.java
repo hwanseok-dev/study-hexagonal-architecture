@@ -1,12 +1,12 @@
 package io.lucky.user.persistence.mapper;
 
 import io.lucky.user.domain.User;
-import io.lucky.user.persistence.entity.UserJpaEntity;
+import io.lucky.user.persistence.entity.UserEntity;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserMapper {
-    public User toDomain(UserJpaEntity entity) {
+    public User toDomain(UserEntity entity) {
         return new User(
                 entity.getId(),
                 entity.getEmail(),
@@ -15,8 +15,8 @@ public class UserMapper {
         );
     }
 
-    public UserJpaEntity toEntity(User domain){
-        return new UserJpaEntity(
+    public UserEntity toEntity(User domain){
+        return new UserEntity(
                 domain.getId(),
                 domain.getEmail(),
                 domain.getNickname(),
