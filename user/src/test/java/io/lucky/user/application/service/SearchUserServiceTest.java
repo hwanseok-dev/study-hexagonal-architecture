@@ -14,7 +14,7 @@ class SearchUserServiceTest {
 
     @Test
     void searchUserNotExists(){
-        assertThatThrownBy(() -> searchUserService.getUser(1L))
+        assertThatThrownBy(() -> searchUserService.getOrThrowById(1L))
                 .isInstanceOf(DomainNotFoundException.class);
     }
 }

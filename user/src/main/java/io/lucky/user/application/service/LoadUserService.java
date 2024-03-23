@@ -10,12 +10,9 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class LoadUserService implements LoadUserQuery {
-
     private final SearchUserPort searchUserPort;
-
     @Override
-    public User getUser(Long userId) {
-        return searchUserPort.findByUserId(userId)
-                .orElseThrow(() -> new DomainNotFoundException(User.class, userId));
+    public User getOrThrowById(Long userId) {
+        return searchUserPort.findByUserId(userId).orElseThrow(() -> new DomainNotFoundException(User.class, userId));
     }
 }

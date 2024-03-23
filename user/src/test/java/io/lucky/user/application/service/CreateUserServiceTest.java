@@ -26,7 +26,7 @@ class CreateUserServiceTest {
     @Test
     void createAndSearch(){
         Long userId = createUser();
-        User user = loadUserQuery.getUser(userId);
+        User user = loadUserQuery.getOrThrowById(userId);
         assertThat(userId).isNotNull();
         assertThat(user).isNotNull();
         assertThat(user.getEmail()).isEqualTo(UserTestUtil.USER_EMAIL);
