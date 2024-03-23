@@ -17,6 +17,9 @@ public class RestResponse {
     public static RestResponse badRequest(String message){
         return new RestResponse(400, null, message);
     }
+    public static RestResponse internalServerError(){
+        return new RestResponse(500, null, "error");
+    }
     public static RestResponse unknownError(){
         return new RestResponse(500, null, "error");
     }

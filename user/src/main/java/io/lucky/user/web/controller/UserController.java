@@ -1,6 +1,6 @@
 package io.lucky.user.web.controller;
 
-import io.lucky.user.application.query.LoadUserQuery;
+import io.lucky.user.application.query.SearchUserQuery;
 import io.lucky.user.application.usecase.CreateUserCommand;
 import io.lucky.user.application.usecase.CreateUserUseCase;
 import io.lucky.user.domain.User;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "user", description = "user API")
 public class UserController {
     private final CreateUserUseCase createUserUseCase;
-    private final LoadUserQuery loadUserQuery;
+    private final SearchUserQuery searchUserQuery;
 
     @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "유저 생성", description = "유저를 생성합니다")
@@ -37,7 +37,7 @@ public class UserController {
     @GetMapping(value = "/id/{id}")
     @Operation(summary = "유저 조회", description = "유저 상세 정보 조회")
     public RestResponse searchOne(@PathVariable Long id) {
-        User user = loadUserQuery.getOrThrowById(id);
+        User user = searchUserQuery.getOrThrowById(id);
         return RestResponse.ok(new SearchUserResponse(user));
     }
 }

@@ -5,6 +5,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @Slf4j
 public class GlobalExceptionHandler {
     @ExceptionHandler({
+            BusinessException.class,
             ConstraintViolationException.class, // Command 클래스 SelfValidating 검증
             DomainNotFoundException.class
     })
@@ -23,6 +26,17 @@ public class GlobalExceptionHandler {
                                     final HttpServletResponse res,
                                     final Exception e) {
         return RestResponse.badRequest(e.getMessage());
+    }
+
+    @ExceptionHandler({
+            DataAccessException.class, // DB 제약조건 위배
+    })
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    public RestResponse persistenceError(final HttpServletRequest req,
+                                    final HttpServletResponse res,
+                                    final Exception e) {
+        log.error(e.getMessage(), e);
+        return RestResponse.internalServerError();
     }
 
     @ExceptionHandler({

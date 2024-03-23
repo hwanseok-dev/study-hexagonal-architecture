@@ -7,12 +7,14 @@ import io.lucky.user.persistence.entity.UserEntity;
 import io.lucky.user.persistence.mapper.UserMapper;
 import io.lucky.user.persistence.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class UserAdapter implements CreateUserPort, SearchUserPort {
     private final UserMapper userMapper;
     private final UserRepository userRepository;
@@ -28,5 +30,10 @@ public class UserAdapter implements CreateUserPort, SearchUserPort {
     public Optional<User> findByUserId(Long userId) {
         return userRepository.findById(userId)
                 .map(userMapper::toDomain);
+    }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
     }
 }

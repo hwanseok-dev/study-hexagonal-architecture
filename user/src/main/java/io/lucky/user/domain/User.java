@@ -10,4 +10,8 @@ public class User extends BaseDomain {
     private final String email;
     private final String nickname;
     private final String password;
+
+    public static User newInstance(String email, String nickname, String password){
+        return new User(null, email, nickname, password);
+    }
 }

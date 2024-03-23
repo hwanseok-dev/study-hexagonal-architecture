@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @IntegrationTestConfig
 class SearchUserServiceTest {
     @Autowired
-    private LoadUserService searchUserService;
+    private SearchUserService searchUserService;
 
     @Test
     void searchUserNotExists(){
