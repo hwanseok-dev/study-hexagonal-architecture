@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 @RequiredArgsConstructor
 @Slf4j
@@ -24,6 +26,12 @@ public class TierAdapter implements CreateTierPort, SearchTierPort {
         TierEntity entity = tierMapper.toEntity(tier);
         TierEntity savedEntity = tierRepository.save(entity);
         return savedEntity.getId();
+    }
+
+    @Override
+    public Optional<Tier> findOneById(Long id) {
+        return tierRepository.findById(id)
+                .map(tierMapper::toDomain);
     }
 
     @Override

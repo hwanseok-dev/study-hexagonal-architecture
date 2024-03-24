@@ -6,7 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.Assert;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @RequiredArgsConstructor
 @Getter
@@ -37,16 +38,18 @@ public class User extends BaseDomain {
     }
 
     public void addTier(Tier tier){
+        Assert.isTrue(!tierSet.contains(tier), "Tier must not be exists in tierSet");
         int tierSize = tierSet.size();
         if (tierSize >= MAX_TIER_SIZE) {
             log.error("msg : {}, userId : {}, oldSize : {}", "tierMaxSizeError", id, tierSize);
             throw new BusinessException("Max tier size is " + MAX_TIER_SIZE);
         }
+        log.info("msg : {}, userId : {}, tierId : {}", "addTier", id, tier.getId());
         tierSet.add(tier);
     }
 
     public void removeTier(Tier tier){
-        Assert.isTrue(tierSet.contains(tier), "Remove tier not exists");
+        Assert.isTrue(tierSet.contains(tier), "Tier must be exists in tierSet");
         log.info("msg : {}, userId : {}, tierId : {}", "removeTier", id, tier.getId());
         tierSet.remove(tier);
     }

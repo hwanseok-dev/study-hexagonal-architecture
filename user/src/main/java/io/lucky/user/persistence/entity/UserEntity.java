@@ -5,6 +5,9 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -18,13 +21,18 @@ public class UserEntity {
     private String nickname;
     private String password;
 
+    @OneToMany
+    private Set<TierEntity> tierSet = new HashSet<>();
+
     public UserEntity(Long idOrNull,
                       String email,
                       String nickname,
-                      String password) {
+                      String password,
+                      Set<TierEntity> tierSet) {
         this.id = idOrNull;
         this.email = email;
         this.nickname = nickname;
         this.password = password;
+        this.tierSet = tierSet;
     }
 }
